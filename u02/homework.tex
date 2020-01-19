@@ -1,0 +1,31 @@
+\begin{enumerate}[label={Aufgabe H\arabic*},start=10]
+	\item 
+		\begin{enumerate}
+			\item Bei Multiprogramming wird der Prozessor zwischen mehreren Prozessen hin- und hergeschaltet. Jeder Prozess wird jedes Mal nur für einige 10 bis 100 Millisekunden ausgeführt, dann wird es unterbrochen. Zu jedem Zeitpunkt wird nur 1 Prozess ausgeführt. Da das CPU sehr schnell ist, scheint es aber, dass mehrere Prozesse gleichzeitig abgelaufen haben. 
+
+			Das kann man als pseudo-parallele Ausführung von Prozessen nennen. 
+			\item Man kann mehr Programmen in weniger Zeit ausführen. Das heißt auch, dass die Mittlerantwortzeit aller Prozesse reduziert sind.
+			\item 
+				\begin{enumerate}[label={(\roman*)}]
+					\item Es gibt insgesamt 10 Möglichkeiten:
+						\begin{multicols}{2}
+							\begin{enumerate}[label={\texttt{[\arabic*]}}]
+								\item \texttt{ABCDE}
+								\item \texttt{ABDCE}
+								\item \texttt{ABDEC}
+								\item \texttt{ADBCE}
+								\item \texttt{ADBEC}
+								\item \texttt{ADEBC}
+								\item \texttt{DABCE}
+								\item \texttt{DABEC}
+								\item \texttt{DAEBC}
+								\item \texttt{DEABC}
+							\end{enumerate}
+						\end{multicols}
+					\item Das bedeutet, dass die Anweisung \texttt{E} muss nach der Anweisung \texttt{B} ausgeführt werden. Das passiert leider in 3 von 10 obengennanten Möglichkeiten nicht: \texttt{[ADEBC]}, \texttt{[DAEBC]} und \texttt{[DEABC]}. In diesen Fallen kann es dann zum Fehler beim Datenlesen führen, z. B. Segmentation Fault. Anweisung E kann vielleicht auch einfach nicht durchgeführt werden können.
+
+					Unter solchen Bedingungen muss es in dem Programm dann explizit gemacht, dass die Anweisung \texttt{B} nach der Anweisung \texttt{E} durchgeführt werden muss. 
+				\end{enumerate}
+		\end{enumerate}
+	\item Sehen Sie bitte \texttt{u02-h11.txt}
+\end{enumerate}

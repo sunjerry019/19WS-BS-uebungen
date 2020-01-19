@@ -1,0 +1,86 @@
+\begin{enumerate}[label={Aufgabe H\arabic*},start=45]
+    \item 
+        \begin{enumerate}
+            \makeatletter
+                \setlength{\leftmargins}{\@totalleftmargin}
+            \makeatother
+
+            \item Es gibt die folgende kritische Bereiche:
+                \begin{itemize}
+                    \item Türbereich betreten
+                    \item Barhocker besitzen
+                    \item Getränke von dem Barkeeper bestellen
+                \end{itemize}
+            \item \blanko
+                \vspace{-1em}
+                \begin{center}
+                    \small
+                    \begin{tabularx}{0.85\textwidth}{p{3cm}X}
+                        \toprule
+                        Bezeichner & Zweck \\
+                        \midrule
+                        \texttt{bestellwunsch} & Signalisiert dem Barkeeper einen Bestellwunsch\\
+                        \texttt{getränk\_fertig} & Signalisiert einem Gast die Fertigstellung seines Getränks \\
+                        \texttt{barkeeper\_frei} & Signalisiert einem Gast ob der Barkeeper derzeit frei ist \\
+                        \texttt{tür\_frei} & Signalisiert einem Gast ob die Tür frei ist \\
+                        \texttt{barhocker\_frei} & Zeigt, wie viele freie Barhocker es gibt \\
+                        \bottomrule
+                    \end{tabularx}
+                \end{center}
+                \vspace{\baselineskip}
+            \item \blanko
+                \vspace{-1em}
+                \begin{center}
+                    \small
+                    \begin{tabularx}{0.85\textwidth}{p{4.5cm}X}
+                        \toprule
+                        Pseudocode & Bedeutung \\
+                        \midrule
+                        \texttt{init(bestellwunsch, 0);} & Initialisiert den Semaphor \texttt{bestellwunsch} mit dem Wert 0 \\
+                        \texttt{init(getränk\_fertig, 0);} & Initialisiert den Semaphor \texttt{getränk\_fertig} mit dem Wert 0 \\
+                        \texttt{init(barkeeper\_frei, 1);} & Initialisiert den Semaphor \texttt{barkeeper\_frei} mit dem Wert 1. Er ist am Anfang frei. Dieser Semaphor stellt es sicher, dass nur ein Gast mit dem Barkeeper interagieren kann.\\
+                        \texttt{init(tür\_frei, 1);} & Initialisiert den Semaphor \texttt{tür\_frei} mit dem Wert 1. Es ist am Anfang frei. \\
+                        \texttt{init(barhocker\_frei, 5);} & Initialisiert den Semaphor \texttt{barhocker\_frei} mit dem Wert 5. Es gibt am Anfang 5 freie Barhockern\\
+                        \bottomrule
+                    \end{tabularx}
+                \end{center}
+            \pagebreak[4]
+            \item \blanko 
+                \vspace{\baselineskip}
+
+                \begin{minted}[linenos,firstnumber=last,autogobble,xleftmargin=-\leftmargins,frame=leftline,framesep=10pt]{java}
+                Gast() {
+                    wait(tür_frei);
+                    <die Bar betreten>;
+                    wait(barhocker_frei); // Warten im Türbereich bis Barhocker frei ist
+                    <auf Hocker Platz nehmen>;
+                    signal(tür_frei);
+
+                    for(Getränke = 0; Getränke < 3; Getränke ++) {
+                        wait(barkeeper_frei);
+                        signal(bestellwunsch); // Bestellung aufgeben
+                        wait(getränk_fertig);  // Zubereitung abwarten
+                        <Getränk entgegennehmen>;
+                    }
+
+                    wait(tür_frei);
+                    // Den Türbereich betreten
+                    signal(barhocker_frei);
+                    <die Bar verlassen>;
+                    signal(tür_frei);
+                }
+                Barkeeper() {
+                    while(true) {
+                        // auf Bestellung warten
+                        wait(bestellwunsch);
+                        //Fertigstellung signalisieren
+                        signal(getränk_fertig);
+                        <Getränk an den Gast geben>;
+                        signal(barkeeper_frei);
+                    }
+                }
+                \end{minted}
+            \vspace{\baselineskip}
+        \end{enumerate}
+    \item Sehen Sie bitte \texttt{u09-h46.txt}
+\end{enumerate}

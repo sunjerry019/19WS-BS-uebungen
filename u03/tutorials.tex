@@ -1,0 +1,53 @@
+2019-11-07
+
+\begin{enumerate}[label={T\arabic*},start=12]
+	\item 
+		\begin{enumerate}
+			\item
+				(i) nicht erlaubt
+				(ii) Warten auf ereignis
+				(iii) Nicht logisch
+			\item 
+				Scheduler != Dispatcher
+					Scheduler:  Entscheidet wer wann dran ist
+					Dispatcher:	Dispatching eines Ready-Prozesses
+
+				New -> Ready: 			Anwendung gestartet
+				Ready -> Running: 		Dispatched
+				Timeout:				Laufenden Prozess Unterbrochen wird.
+				Warte auf Ereignis: 	Warte auf benutzer Angabe
+				Ergebniss tritt ein:	Eingabe ist geschehen
+				Exit:					Von benutzer beendet wird
+			\item Das Modell ändert sich nicht. Nicht Sinnvoll. Alles geht um 1 Prozess
+		\end{enumerate}
+	Ready to Running: Dispatcher!!!
+
+	\item ps = In der Shell laufenden Prozesse
+		\begin{enumerate}
+			\item Virtuelles Verzeichnis /proc
+			\item 
+			\item Sehr leicht auf Systeminformation zugreifen
+			\item 
+				-A = Select all processes
+				-l = Long format
+				-p = Process ID
+			\item PID, PPID (Parent Process), PRI = Priority
+			\item bash
+			\item bash has the same pid as the ppid of ps
+			\item Wurzelprozess = Init/systemd ppid=0
+			\item nach oben weitergegeben
+		\end{enumerate}
+	\item Nicht-präemptive FCFS (First Come First Serve) / SJF (Shortest Job First)
+		Niedrige Process ID comes first
+		\begin{enumerate}
+			\item
+			\item Verweilzeit (Ready + Running), Wartezeit ( = Ready)
+			VWZ:
+				FCFS = (2 + 4 + 11 + 12 + 13)/5 = 8,4
+				SJF = (2+4+16+7+3)/5 = 6,4
+			Wartenzeit:
+				FCFS = (0+0+4+9+11)/5 = 4,8
+				SJF = (0+0+9+4+1)/5 = 2.8
+			\item SJF -> Langen Prozess entweder kommen sehr spät dran (Lange Prozesse haben eine sehr hohe Wartezeit, können verhungern)
+		\end{enumerate}
+\end{enumerate}

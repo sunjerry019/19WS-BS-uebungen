@@ -1,0 +1,55 @@
+\begin{enumerate}[label={Aufgabe H\arabic*},start=4]
+	\item 
+	\begin{enumerate}[label={\alph*.}]
+	    \item Wenn man nur offene Unterprogramme verwendet, führt es unter anderen zu folgenden Probleme:
+	        \begin{enumerate}[label={(\roman*)}]
+	            \item Es verschwendet Speicherplatz und ist ineffizient bei langen Unterprogrammen
+
+	            % Sehr hohe Redundanz, wenn fleicher Code an mehrer Stellen im Progreamm auftaucht
+	            	% Dadurch laenger uuebersichtlicher Code und mehr verbraucher Speicherplatz
+
+	            % Hoeherer Wartungsaufwand
+
+	            % Keine Rekursion moeglich
+
+	            \item Nachträgliche Modifikationen am Unterprogramm müssen an jedem Vorkommen vorgenommen werden.
+	        \end{enumerate}
+	    \item Es braucht mehrere Befehle, um an einem geschlossenen Unterprogramm zu springen und dann an Hauptprogramm zurückzuspringen. Die Rückkehradresse muss auch gespeichert werden. Bei besonders kleinen Unterprogrammen werden dann im Vergleich zu einem offenen Unterprogramm viel mehr Speicherplatz und Befehle bzw. Zeit verwendet als nötig.
+
+	    % Aufrufe geschlossener Unterprogramm erfordern:
+	    - Spruenge
+	    Parameter uebergaben
+	    Sicherung und Wiederherstellung des Caller-Kontees,
+	    Ergebnisrueckgaben usw.
+	    -> Zu viel Overhead
+
+	    \item Es gibt zwei Arten der Parameterübergabe, nämlich:
+	    	\begin{enumerate}[label={(\roman*)}]
+	    		\item Call by value (Wertübergabe)
+	    		\item Call by reference (Adressübergabe)
+	    	\end{enumerate}
+	    \item \label{desc:PC} Der CPU hat ein Register \texttt{PC} (engl. Program Counter). Dieses Register enthält die Adresse der Speicherzelle des nächsten auszuführenden Befehls. Ein Sprungbefehl überschreibt diesen Wert durch eine neue Adresse. 
+	    \item Mit \texttt{CALL} wird die Rückkehradresse in einem speziellen Register (\texttt{RA}) bzw. auf dem Stack gespeichert, bevor einen äquivalenten \texttt{JMP} Befehl (wie in (\ref{desc:PC})) durchgeführt wird.
+	    \pagebreak
+	    \item
+	    	\begin{itemize}
+	    		\item Wenn die Rückkehradress bei dem \texttt{CALL} Befehl in Register \texttt{RA} gesichert, dann wird den folgenden Befehl als \texttt{RET} implementiert:
+	    		%  RET ueberschriebt das Statusregister PC mit dem inhalt des RA-Registers.
+	    		\begin{minted}{as}
+	COMMAND RET
+	BEGIN
+	  PC := RA;
+	END
+	    		\end{minted}
+	    		\item Wenn die Rückkehradress bei dem \texttt{CALL} Befehl auf dem Stack gespeichert, dann wird den folgenden Befehl als \texttt{RET} implementiert:
+	    		% RET holt das oberste Element vom Stack und schriebt den Inhalt in das PC Register
+	    		\begin{minted}{as}
+	COMMAND RET
+	BEGIN
+	  PC := POP;
+	END
+	    		\end{minted}
+	    	\end{itemize}
+	\end{enumerate}
+	\item Sehen Sie bitte \texttt{u01-h5.txt}
+\end{enumerate}

@@ -1,0 +1,53 @@
+% Besprechung 2019-11-14
+\begin{enumerate}[label={T\arabic*},start=18]
+	\item 
+		\begin{enumerate}
+			\item
+				== Zustand ==
+				New:	Der Patient befindet sich im Eingangsbereich
+				Rdsp:	Patient im Wartezimmer. Könnte behandelt werden, sofern ein Behandlungszimmer frei ist. 
+				Bksp:	Patient im Wartezimmer. Könnte nicht behandelt werden, weil er auf ein Ereignis (Röntgenbilder) wartet.
+				Ready:	Patient im Behandlungszimmer, könnte behandelt werden.
+				Blked:	wie Bksp., aber im Behandlungszimmer
+				Runng:	Der Artz behandelt der Patienten
+				Exit:	Der verlässt die Praxis.
+
+				== Übergang ==
+				New   -> Ready: Die Aufnahme ist erst abgeschlossen.
+				RdSp  -> Ready: Die Patient wird in ein Behandlungszimmer gebeten
+				Bksp  -> Ready: Die Patient wird in ein Behandlungszimmer gebeten
+				Ready -> RdSp : Patient wird gebeten nochmals, im Wartezimmer Platz zu nehmen. 
+				Blked -> BkSp : Patient wird gebeten nochmals, im Wartezimmer Platz zu nehmen. 
+				Blked -> Ready: Patient sitzt Behandlungszimmer und die Röntgenbilder treffen ein.
+				BkSp  -> RdSp : Patient sitzt Wartezimmer und die Röntgenbilder treffen ein.
+				Ready -> Runng: Die Arzt beginnt die Behandlung (in Behandlungszimmer)
+				Runng -> Ready: Arzt unterbrecht die Behdnlung (könnte weitergehen)
+				Runng -> Blked: Arzt unterbrecht die Behdnlung, warten auf Röntgenbilder (im Behandlungszimmer)
+				Runng -> Exit : Behandlung fertig ist. Patient verlässt die Praxis.
+
+				READY BLOCKED -> BEHANDLUNGSZIMMER
+				SUSPEND -> WARTEZIMMER
+
+			\item Behandlungen bestehen meist aus mehreren Teiljobs zwischen diesen können (lange) Wartezeit entstehen z.B. Röntgenbilder
+				-> Sinnvoll andere Patienten zu behandlen.
+				Aber keine Unterbrechungen außerhalb dieser Teiljobs.
+
+			\item 
+				Nachteil (SJF): Patienten mit komplizierten Behandung müssen wahrscheinlich den ganzen Tag in der Praxis verbringen
+				RR: Die Behandlungen dauern länger, aber die Wartezeiten wirken kürzer. 
+				PS (Priority Scheduling): Notfälle schnell zu bearbeiten; Privatpatienten kann der Artz bevorzugen.
+				MLFQ: Jeder Patient kommt anfangs schnell dran. Kurze routinen können also schnell abgearbeitet werden. Die Behandlung komplizierteer Fälle zögert sich jedoch hinaus.  
+					? Is it possible for the 2nd queue to never reach?
+
+			\item 
+				- Die zufällife Auswahl per Zufall wird als unfair wahrgenomme, da es zu relativ wenigen Iterationen kommt. 
+				- Beim Präemptiven-Scheduling ist die Anzahl der Unterbrechungen vergleichsweise hoch. Die Ausführshaufigkeit nähert sich also mit hoher Wahrscheinlichkeit dem Erwartungswert und wird fairer.
+
+		\end{enumerate}
+	\item 
+		SRPT -> Every time section, recheck
+		RR -> New processes always go to the end of the queue.
+\end{enumerate}
+
+Julian Hager
+Gruppe 08

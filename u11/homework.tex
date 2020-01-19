@@ -1,0 +1,145 @@
+\begin{enumerate}[label={Aufgabe H\arabic*},start=55]
+    \item
+        \begin{enumerate}
+            \item Man braucht $\frac{256}{8} = 32$ eindeutige Addresse, das heißt 5 bits.
+            \item $P_1$ geladen:
+                \vspace{-\parskip}
+                \begin{figure}[h!]
+                    \centering
+                    \begin{tikzpicture}[level/.style={sibling distance=50mm/#1},level distance=10mm]
+                        \tikzstyle{free}=[square,thick,draw=gray!75,fill=gray!20,minimum size=6mm]
+                        \tikzstyle{splitused}=[circle,thick,draw=gray!75,fill=gray!20,minimum size=6mm]
+
+                        \begin{scope}
+                            \node [splitused,draw] (z) {}
+                                child
+                                {
+                                    node [splitused,draw] (zz) {}
+                                    child 
+                                    {
+                                        node [splitused,draw] (zzz) {}
+                                        child 
+                                        {
+                                            node [splitused,draw] (zzzz) {}
+                                            child { node [splitused,draw,label=left:{\small \begin{tabular}{c}\SI{16}{\mega\byte}\\\texttt{00000} \end{tabular}}] (zzzzz) {$P_1$} }
+                                            child { node [free,draw,label=right:{\small \SI{16}{\mega\byte}}] (zzzzo) {} }
+                                        }
+                                        child { node [free,draw,label=right:{\small \SI{32}{\mega\byte}}] (zzzo) {} }
+                                    }
+                                    child { node [free,draw,label=right:{\small \SI{64}{\mega\byte}}] (zzo) {} }
+                                }
+                                child { node [free,draw,label=right:{\small \SI{128}{\mega\byte}}] (zo) {} }
+                            ;
+                        \end{scope}
+                    \end{tikzpicture}
+                \end{figure}
+
+                $P_2$ geladen:
+                \vspace{-\parskip}
+                \begin{figure}[h!]
+                    \centering
+                    \begin{tikzpicture}[level/.style={sibling distance=50mm/#1},level distance=10mm]]
+                        \tikzstyle{free}=[square,thick,draw=gray!75,fill=gray!20,minimum size=6mm]
+                        \tikzstyle{splitused}=[circle,thick,draw=gray!75,fill=gray!20,minimum size=6mm]
+
+                        \begin{scope}
+                            \node [splitused,draw] (z) {}
+                                child
+                                {
+                                    node [splitused,draw] (zz) {}
+                                    child 
+                                    {
+                                        node [splitused,draw] (zzz) {}
+                                        child 
+                                        {
+                                            node [splitused,draw] (zzzz) {}
+                                            child { node [splitused,draw,label=left:{\small \begin{tabular}{c}\SI{16}{\mega\byte}\\\texttt{00000} \end{tabular}}] (zzzzz) {$P_1$} }
+                                            child { node [free,draw,label=right:{\small \SI{16}{\mega\byte}}] (zzzzo) {} }
+                                        }
+                                        child { node [free,draw,label=right:{\small \SI{32}{\mega\byte}}] (zzzo) {} }
+                                    }
+                                    child { node [splitused,draw,label=right:{\small \begin{tabular}{c}\SI{64}{\mega\byte}\\\texttt{01000} \end{tabular}}] (zzo) {$P_2$} }
+                                }
+                                child { node [free,draw,label=right:{\small \SI{128}{\mega\byte}}] (zo) {} }
+                            ;
+                        \end{scope}
+                    \end{tikzpicture}
+                \end{figure}
+
+                \pagebreak
+                $P_3$ geladen:
+                \vspace{-\parskip}
+                \begin{figure}[h!]
+                    \centering
+                    \begin{tikzpicture}[level/.style={sibling distance=50mm/#1},level distance=10mm]]
+                        \tikzstyle{free}=[square,thick,draw=gray!75,fill=gray!20,minimum size=6mm]
+                        \tikzstyle{splitused}=[circle,thick,draw=gray!75,fill=gray!20,minimum size=6mm]
+
+                        \begin{scope}
+                            \node [splitused,draw] (z) {}
+                                child
+                                {
+                                    node [splitused,draw] (zz) {}
+                                    child 
+                                    {
+                                        node [splitused,draw] (zzz) {}
+                                        child 
+                                        {
+                                            node [splitused,draw] (zzzz) {}
+                                            child { node [splitused,draw,label=left:{\small \begin{tabular}{c}\SI{16}{\mega\byte}\\\texttt{00000} \end{tabular}}] (zzzzz) {$P_1$} }
+                                            child { node [free,draw,label=right:{\small \SI{16}{\mega\byte}}] (zzzzo) {} }
+                                        }
+                                        child { node [free,draw,label=right:{\small \SI{32}{\mega\byte}}] (zzzo) {} }
+                                    }
+                                    child { node [splitused,draw,label={\small \begin{tabular}{c}\SI{64}{\mega\byte}\\\texttt{01000} \end{tabular}}] (zzo) {$P_2$} }
+                                }
+                                child 
+                                {
+                                    node [splitused,draw] (zo) {}
+                                    child { node [splitused,draw,label=below:{\small \begin{tabular}{c}\SI{64}{\mega\byte}\\\texttt{10000} \end{tabular}}] (zoz) {$P_3$} }
+                                    child { node [free,draw,label=right:{\small \SI{64}{\mega\byte}}] (zoo) {}}
+                                }
+                            ;
+                        \end{scope}
+                    \end{tikzpicture}
+                \end{figure}
+
+                $P_4$ geladen:
+                \vspace{-\parskip}
+                \begin{figure}[h!]
+                    \centering
+                    \begin{tikzpicture}[level/.style={sibling distance=50mm/#1},level distance=10mm]]
+                        \tikzstyle{free}=[square,thick,draw=gray!75,fill=gray!20,minimum size=6mm]
+                        \tikzstyle{splitused}=[circle,thick,draw=gray!75,fill=gray!20,minimum size=6mm]
+
+                        \begin{scope}
+                            \node [splitused,draw] (z) {}
+                                child
+                                {
+                                    node [splitused,draw] (zz) {}
+                                    child 
+                                    {
+                                        node [splitused,draw] (zzz) {}
+                                        child 
+                                        {
+                                            node [splitused,draw] (zzzz) {}
+                                            child { node [splitused,draw,label=left:{\small \begin{tabular}{c}\SI{16}{\mega\byte}\\\texttt{00000} \end{tabular}}] (zzzzz) {$P_1$} }
+                                            child { node [splitused,draw,label=right:{\small \begin{tabular}{c}\SI{16}{\mega\byte}\\\texttt{00010} \end{tabular}}] (zzzzo) {$P_4$} }
+                                        }
+                                        child { node [free,draw,label=right:{\small \SI{32}{\mega\byte}}] (zzzo) {} }
+                                    }
+                                    child { node [splitused,draw,label={\small \begin{tabular}{c}\SI{64}{\mega\byte}\\\texttt{01000} \end{tabular}}] (zzo) {$P_2$} }
+                                }
+                                child 
+                                {
+                                    node [splitused,draw] (zo) {}
+                                    child { node [splitused,draw,label=below:{\small \begin{tabular}{c}\SI{64}{\mega\byte}\\\texttt{10000} \end{tabular}}] (zoz) {$P_3$} }
+                                    child { node [free,draw,label=right:{\small \SI{64}{\mega\byte}}] (zoo) {}}
+                                }
+                            ;
+                        \end{scope}
+                    \end{tikzpicture}
+                \end{figure}
+        \end{enumerate}
+    \item Sehen Sie bitte \texttt{u10-h51.txt}
+\end{enumerate}

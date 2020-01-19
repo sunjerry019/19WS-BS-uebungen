@@ -1,0 +1,37 @@
+% Besprechung 2019-11-21
+\begin{enumerate}[label={T\arabic*},start=24]
+	\item 
+		\begin{enumerate}
+			\item 
+				\begin{itemize}
+					\item No Preemption. Die Resourcen dart den Prozess nicht entzogen werdern. Der P. gibt sie nur freiwillig ab.
+
+					\item Circular Wait. Menge von Prozesson \makeset{P_1, \cdots, P_n} die warten, so dass \forall 1 \leq i \leq n gilt P_{i-1} wartet auf Rec, die von P_i belegt ist und P_n wartet auf die Resc, die von P_1 belegt ist. 
+
+					% If not circular, its just a queue
+
+					\item Mutual Exclusion: Die Betriebsmittel stellt im ...seitigen Auschliess. d.h. nur ein P. jeweil die Resc halten kann. 
+
+					\item Hold and wait: P. durfen Rec nehmen, während sie auf die Freigabe andere Resc warten. 
+				\end{itemize}
+			\item Wir ordnen jeder Resc $R$ eine Zahl $F(R)$ zu. 
+
+			Strategie: Jeder Proc kann R_j, nur dann belegen, wenn für alle R_i, die der Proc belegt, gilt: F(R_j) > F(R_i). D. h. Bevor ein Proc R?j belegen kan, muss er alle R_i mit F(R_i) mit F(F(R_i) >= F(R_3)
+
+			Man muss in die Reihenfolge belegen -> Circular Wait UNTERBROCHEN.
+		\end{enumerate}
+	\item 
+		\begin{enumerate}
+			\item Note that the intervals are open
+			\item Prinzipell unterschiedliche -> In the perspective of the BM. 
+
+			If 2 U.M Block are next to each other, and there is like an edge, the programme can technically go that route.
+
+			nicht atomär
+
+			\item deadlock is only guranteed when u cross the gestricheten berecih
+		\end{enumerate}}
+\end{enumerate}
+
+Julian Hager
+Gruppe 08

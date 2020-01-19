@@ -1,0 +1,105 @@
+\begin{enumerate}[label={Aufgabe H\arabic*},start=31]
+    \item Sie können den Quellcode auch in der Datei \texttt{Server.java.txt} sehen.
+        \begin{enumerate}
+            \makeatletter
+                \setlength{\leftmargins}{\@totalleftmargin}
+            \makeatother
+
+            \item \blanko
+                \begin{minted}[linenos,firstnumber=7,autogobble,xleftmargin=-\leftmargins,frame=leftline,framesep=10pt]{java}
+                    public Server(int maxClients)
+                    {
+                        this.maxClients = maxClients;
+                        this.anzahlClients = 0;
+                        this.sicherungswunsch = false;
+                    }
+                \end{minted}
+            \item \blanko 
+
+                \begin{minted}[linenos,firstnumber=last,autogobble,xleftmargin=-\leftmargins,frame=leftline,framesep=10pt]{java}
+                    public synchronized void daten_ablegen(Client c) throws InterruptedException
+                    {
+                        System.out.println("Client " + c.ID + " will Daten ablegen");
+                        
+                    // ----- kritischer Bereich -----
+                        while(this.anzahlClients >= this.maxClients || this.sicherungswunsch)
+                        {
+                            try { wait(); }
+                            catch(InterruptedException e) {} // <<<<<< nicht nötig
+                        }
+                        anzahlClients ++; 
+                        System.out.println(anzahlClients + " Clients legen Daten ab.");
+                    }
+                    public synchronized void daten_ablegen_beenden()
+                    {
+                        anzahlClients --;
+                    // ----- kritischer Bereich verlassen -----
+                        notifyAll(); // Mehrere Prozesse -> notifyAll() statt notify()
+                    } 
+                \end{minted}
+
+                Es gibt bei beider Methoden kein "Sanity Check", da wir davon ausgehen, dass die Methoden immer in einer sinnvollen Reihenfolge aufgerufen werden.
+            \item \blanko
+
+                \begin{minted}[linenos,firstnumber=last,autogobble,xleftmargin=-\leftmargins,frame=leftline,framesep=10pt]{java}
+                    public synchronized void sicherungAktivieren() throws InterruptedException
+                    {
+                        this.sicherungswunsch = true;
+                        System.out.println("Sicherungswunsch angemeldet!");
+                
+                        notifyAll();    // << Nicht nötig, nur für wait()
+                        
+                    // ----- kritischer Bereich -----
+                        while(this.anzahlClients > 0)
+                        {
+                            try { wait(); }
+                            catch(InterruptedException e) {}
+                        }
+                        // Zum Sichern bereit.
+                    }   
+                    public synchronized void sicherungDeaktivieren()
+                    {
+                        this.sicherungswunsch = false;
+                    // ----- kritischer Bereich verlassen -----
+                        System.out.println("Sicherungswunsch deaktiviert.");
+                        notifyAll();
+                    }
+                \end{minted}
+            \item Die 2 kritische Bereichen sind:
+                \begin{itemize}
+                    \item Als ein Client Daten in den Server ablegen möchte, und
+                    \item Als das Sicherungsskript eine Sicherung machen möchte.
+                \end{itemize}
+
+                % Setzen von sicherungswunsch
+                % Inkrementieren/Dekrementieren von anzahlClients
+
+                % Mutual Exclusion durch das Schluesselwort synchronized in der Methodendeklaration
+
+                Die beide Bereichen beziehen sich auf das Schreiben bzw. Lesen von Daten. Es wird hier mithilfe der folgenden Schritten sichergestellt, dass die Bedingungen der wechseitiges Anschluss erfüllt ist:
+                \begin{itemize}
+                    \item Die Methoden sind alle synchronisiert. 
+                    \item Die Betriebstatus des Systems wird durch die Variablen \mintinline{java}{Server.anzahlClients} und \mintinline{java}{Server.sicherungswunsch} gespeichert. Sie werden bei jedem Methodenaufruf aktualisiert.
+                    \item Das Sicherungsskript wartet darauf, dass \mintinline{java}{Server.anzahlClients} null ist. Das stellt es sicher, dass kein Client legt Daten auf dem Server.
+                    \item Die Clients warten, wenn \mintinline{java}{Server.sicherungswunsch} wahr ist. 
+
+                    \mintinline{java}{Server.sicherungswunsch} wird nur wieder auf falsch gestellt, wenn das Sicherungsskript fertig ist. Das stellt es sicher, dass kein Client legt mehr Daten auf dem Server, wenn eine Sicherung durchgeführt wird. 
+                \end{itemize}
+
+                Dabei entsteht wechselseitige Ausschluss.
+        \end{enumerate}
+    \item Alle Stellen haben die Kapazität $\infty$ und alle Kanten haben das Gewicht 1. Die Stellen für die Semphoren exisiert nur, weil die Kanten alle das Gewicht 1 haben müssen. Die Anfangsmarkierung beschreibt die in dem Übungsblatt gezeichneten Situation:
+
+        \vspace{2em}
+
+        \begin{figure}[h!]
+            \centering
+            \includegraphics[width=0.7\textwidth]{q32.eps}
+            \caption{Petri-Netz Aufgabe 32}
+
+            LOL OKAY THERE IS NO CONSERVATION OF MARKE Semaphor A' bzw. C' nicht nötig
+        \end{figure}
+
+        Es gibt 2 Stellen für den Abschnitt B, um die Bedingungung zu modellieren, dass kein Richtungswechsel in B möglich ist. Die Sicherheitsbedingung wird durch die Semaphoren $S_{\text{Semaphor } A}$ und $S_{\text{Semaphor } C}$ bzw. $S_{\text{Semaphor } A'}$ und $S_{\text{Semaphor } C'}$ sicher gestellt. 
+    \item Sehen Sie bitte \texttt{u06-h33.txt}
+\end{enumerate}

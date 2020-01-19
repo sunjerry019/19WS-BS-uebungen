@@ -1,0 +1,3 @@
+#!/bin/bash
+
+javac Simulation.java && java Simulation

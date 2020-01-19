@@ -1,0 +1,7 @@
+a) iii
+b) ii
+c) i
+d) iv
+e) i
+
+Teilweise verklemmung = Livelock

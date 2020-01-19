@@ -1,0 +1,50 @@
+\begin{enumerate}[label={Aufgabe H\arabic*},start=50]
+    \item Der vollständige Quellcode ist unter \texttt{Lager.java.txt} verfügbar.
+        \begin{enumerate}
+            \makeatletter
+                \setlength{\leftmargins}{\@totalleftmargin}
+            \makeatother
+
+            \item \blanko
+                \begin{minted}[linenos,breaklines,firstnumber=5,autogobble,xleftmargin=-\leftmargins,frame=leftline,framesep=10pt]{java}
+                    public Lager(int aepfel, int apfelmus) {
+                        this.aepfel = aepfel;
+                        this.apfelmus = apfelmus;
+                    }
+                \end{minted}
+            \item \blanko
+                \begin{minted}[linenos,breaklines,firstnumber=16,autogobble,xleftmargin=-\leftmargins,frame=leftline,framesep=10pt]{java}
+                    public synchronized void apfelmusEntnehmen(int id, int anzahl) throws InterruptedException {
+                        while (this.apfelmus < anzahl) {
+                            System.out.println("Identitaet " + id + 
+                                    " muss warten. Anz. apfelmus:" + apfelmus);
+                            wait();
+                        }
+                        this.apfelmus -= anzahl;
+                        System.out.println(anzahl + " Apfelmus entnommen von " + id + 
+                                    " , Anz. Apfelmus:" + this.apfelmus);
+                    }
+                \end{minted}
+            \item \blanko
+                \begin{minted}[linenos,breaklines,firstnumber=27,autogobble,xleftmargin=-\leftmargins,frame=leftline,framesep=10pt]{java}
+                    public synchronized void aepfelEntnehmen(int anzahl) throws InterruptedException {
+                        while (this.aepfel < anzahl) {
+                            System.out.println("Koch muss warten. Anz. Aepfel:" + aepfel);
+                            wait();
+                        }
+                        this.aepfel -= anzahl;
+                        System.out.println(anzahl + " Aepfel entnommen, Anz. Aepfel:" + this.aepfel);
+                    }
+                \end{minted}
+            \item \blanko
+                \begin{minted}[linenos,breaklines,firstnumber=36,autogobble,xleftmargin=-\leftmargins,frame=leftline,framesep=10pt]{java}
+                    public synchronized void apfelmusEinlagern(int anzahl) {
+                        this.apfelmus += anzahl;
+                        System.out.println(anzahl + " Apfelmus eingelagert, Anz. Apfelmus:" + this.apfelmus);
+                        notifyAll();
+                    }
+                \end{minted}
+            \item Bei dem Befehl \mintinline{java}{notify()} ist ein Thread zufällig aufgewacht. Da die 2 verschiedene Typen von Threads (\textit{Koch} und \textit{Feldarbeiter}) nicht äquivalent sind, kann es sein, dass zu einem spezifischen Zeitpunkt nur ein Typ davon weitermachen kann. In diesem Fall wartet nur der Koch auf Äpfeln. Es kann dann zu einem Deadlock führen, wenn ein \textit{Feldarbeiter}-Thread statt der \textit{Koch}-Thread aufgewacht wird. Kein Apfelmus wird gekocht und die \textit{Feldarbeiter}-Threads können auch wegen des Mangels von Apfelmus nicht weiter machen. Deshalb ist es wichtig in diesem Fall, den Befehl \mintinline{java}{notifyAll()} statt \mintinline{java}{notify()} aufzurufen.
+        \end{enumerate}
+    \item Sehen Sie bitte \texttt{u10-h51.txt}
+\end{enumerate}

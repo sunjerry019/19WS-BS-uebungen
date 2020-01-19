@@ -1,0 +1,122 @@
+\begin{enumerate}[label={Aufgabe H\arabic*},start=36]
+    \item 
+        \begin{enumerate}
+            \item 
+                \begin{enumerate}[label={(\roman*)}]
+                    \item \blanko
+                        \begin{figure}[h!]
+                            \centering
+                            \begin{tikzpicture}[node distance=1.3cm,>=stealth',bend angle=30,auto,scale=1.2,every node/.style={scale=1.2}]
+                                \tikzstyle{place}=[circle,thick,draw=blue!75,fill=blue!20,minimum size=6mm]
+                                \tikzstyle{transition}=[rectangle,thick,draw=black!75,
+                                          fill=black!20,minimum width=8mm,inner ysep=3pt]
+
+                                \tikzstyle{every label}=[black]
+
+                                \begin{scope}
+                                \node [place,label=below:{\small $\scriptstyle S_\text{Computer}$},tokens=1] (s1) {};
+                                \node [transition,label=below:{\small $\scriptstyle T_\text{Will Drucken}$}] (t1) [right =of s1] {};
+                                \node [place,label=below:{\small $\scriptstyle S_\text{Schlange}$}] (s2) [right =of t1] {};
+                                \node [transition,label=below:{\small $\scriptstyle T_\text{Drucken}$}] (t2) [right =of s2] {};
+                                \node [place,label=above:{\small $\scriptstyle S_\text{Druckt}$}] (s3) [above right =of t2] {};
+                                \node [place,label=below:{\small $\scriptstyle S_\text{Wartet}$},tokens=1] (s4) [below right =of t2] {};
+                                \node [transition,label=right:{\small $\scriptstyle T_\text{Fertig}$}] (t3) at (t2 -| s3) {};
+
+                                \draw (t1) edge [pre]  node{\scriptsize 1}                                  (s1);
+                                \draw (t1.east) edge [post,out=45,in=45,looseness=2] node{\scriptsize 1}    (s1);
+                                \draw (t1) edge [post] node{\scriptsize 1}                                  (s2);
+                                \draw (t2) edge [pre] node{\scriptsize 1}                                   (s2);
+                                \draw (t2.west) edge [pre,out=225,in=225,looseness=1.5] node{\scriptsize 1} (s4);
+                                \draw (t2.east) edge [post] node{\scriptsize 1}                             (s3);
+                                \draw (t3) edge [pre]  node{\scriptsize 1}                                  (s3);
+                                \draw (t3) edge [post]  node{\scriptsize 1}                                 (s4);
+                                \end{scope}
+                            \end{tikzpicture}
+                            \caption{Petri-Netz Modellierung des Druckers}
+                        \end{figure}
+                    \item \blanko
+                        \begin{figure}[h!]
+                            \centering
+                            \begin{tikzpicture}[node distance=1.3cm,>=stealth',bend angle=30,auto,scale=1.2,every node/.style={scale=1.2}]
+                                \tikzstyle{place}=[circle,thick,draw=blue!75,fill=blue!20,minimum size=6mm]
+                                \tikzstyle{transition}=[rectangle,thick,draw=black!75,
+                                          fill=black!20,minimum width=8mm,inner ysep=3pt]
+
+                                \tikzstyle{every label}=[black]
+
+                                % \begin{scope}
+                                % \node [place,label=above:{\small $\scriptstyle S_\text{Computer}$},tokens=1] (s1) {};
+                                % \node [transition,label=below:{\small $\scriptstyle T_\text{Will Drucken}$}] (t1) [right =of s1] {};
+                                % \node [place,label=below:{\small $\scriptstyle S_\text{Schlange}$}] (s2) [right =of t1] {};
+                                % \node [transition,label=below:{\small $\scriptstyle T_\text{Drucken}$}] (t2) [right =of s2] {};
+                                % \node [place,label=above:{\small $\scriptstyle S_\text{Druckt}$}] (s3) [above right =of t2] {};
+                                % \node [place,label=below:{\small $\scriptstyle S_\text{Wartet}$},tokens=1] (s4) [below right =of t2] {};
+                                % \node [transition,label=right:{\small $\scriptstyle T_\text{Fertig}$}] (t3) at (t2 -| s3) {};
+                                % \node [place,label=above:{\small $\scriptstyle S_\text{Kapazität}$},tokens=3] (s5) at (t1 |- s3) {};
+
+                                % \draw (t1) edge [pre]  node{\scriptsize 1}                                    (s1);
+                                % \draw (t1.west) edge [pre,out=135,in=180,looseness=2]  node{\scriptsize 1}    (s5.west);
+                                % \draw (t1.east) edge [post,out=315,in=315,looseness=2] node{\scriptsize 1}    (s1.south);
+                                % \draw (t1) edge [post] node{\scriptsize 1}                                    (s2);
+                                % \draw (t2) edge [pre] node{\scriptsize 1}                                     (s2);
+                                % \draw (t2.west) edge [pre,out=225,in=225,looseness=1.5] node{\scriptsize 1}   (s4);
+                                % \draw (t2.east) edge [post] node{\scriptsize 1}                               (s3);
+                                % \draw (t2.east) edge [post,out=0,in=0,looseness=1] node[above]{\scriptsize 1} (s5.east);
+                                % \draw (t3) edge [pre]  node{\scriptsize 1}                                    (s3);
+                                % \draw (t3) edge [post]  node{\scriptsize 1}                                   (s4);
+                                % \end{scope}
+
+                                \begin{scope}
+                                \node [place,label=above:{\small $\scriptstyle S_\text{Computer}$},tokens=3] (s1) {};
+                                \node [transition,label=below:{\small $\scriptstyle T_\text{Will Drucken}$}] (t1) [right =of s1] {};
+                                \node [place,label=below:{\small $\scriptstyle S_\text{Schlange}$}] (s2) [right =of t1] {};
+                                \node [transition,label=below:{\small $\scriptstyle T_\text{Drucken}$}] (t2) [right =of s2] {};
+                                \node [place,label=above:{\small $\scriptstyle S_\text{Druckt}$}] (s3) [above right =of t2] {};
+                                \node [place,label=below:{\small $\scriptstyle S_\text{Wartet}$},tokens=1] (s4) [below right =of t2] {};
+                                \node [transition,label=right:{\small $\scriptstyle T_\text{Fertig}$}] (t3) at (t2 -| s3) {};
+
+                                \draw (t1) edge [pre]  node{\scriptsize 1}                                     (s1);
+                                \draw (t1) edge [post] node{\scriptsize 1}                                     (s2);
+                                \draw (t2) edge [pre] node{\scriptsize 1}                                      (s2);
+                                \draw (t2.west) edge [pre,out=225,in=225,looseness=1.5] node{\scriptsize 1}    (s4);
+                                \draw (t2.east) edge [post] node{\scriptsize 1}                                (s3);
+                                \draw (t2.east) edge [post,out=0,in=45,looseness=1] node[above]{\scriptsize 1} (s1);
+                                \draw (t3) edge [pre]  node{\scriptsize 1}                                     (s3);
+                                \draw (t3) edge [post]  node{\scriptsize 1}                                    (s4);
+                                \end{scope}
+                            \end{tikzpicture}
+                            \caption{Petri-Netz Modellierung des Druckers mit Begrenzung}
+                        \end{figure}
+                \end{enumerate}
+            \item 
+                \begin{enumerate}[label={(\roman*)}]
+                    \item \blanko
+                        \begin{figure}[h!]
+                            \centering
+                            \begin{tikzpicture}[node distance=1.3cm,>=stealth',bend angle=30,auto]
+                                \tikzstyle{state}=[rectangle,thick,draw=black!50,
+                                          fill=black!20,minimum width=8mm,inner ysep=3pt,rounded corners=5pt]
+
+                                \tikzstyle{every label}=[black]
+
+                                \begin{scope}
+                                \node [state] (m0) {\texttt{M\textsubscript{0}=(1,1,0)}};
+                                \node [state] (m1) [below left =of m0]{\texttt{M\textsubscript{1}=(0,1,1)}};
+                                \node [state] (m2) [below right =of m0]{\texttt{M\textsubscript{2}=(1,0,1)}};
+                                \node [state] (m3) [below =3 of m0]{\texttt{M\textsubscript{3}=(0,0,2)}};
+
+                                \draw (m0) edge [post] node{\texttt{T1}} (m1);
+                                \draw (m0) edge [post] node{\texttt{T2}} (m2);
+                                \draw (m3) edge [pre] node{\texttt{T2}} (m1);
+                                \draw (m3) edge [pre] node{\texttt{T1}} (m2);
+                                \draw (m3) edge [post] node{\texttt{T0}} (m0);
+                                \end{scope}
+                            \end{tikzpicture}
+                            \caption{Erreichbarkeitsgraph}
+                        \end{figure}
+                    \item Nein, kein Deadlock kann entstehen. Jede Markierung ist durch das Schalten von Transitionen von jeder beliebigen anderen Makierung erriechbar. 
+                \end{enumerate} % Add endliche
+                % Der Erreichbarkeitsbargraph ist zyklisch und stark zusammenhängend ist. 
+        \end{enumerate}
+    \item Sehen Sie bitte \texttt{u07-h37.txt}
+\end{enumerate}

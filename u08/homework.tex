@@ -1,0 +1,207 @@
+\begin{enumerate}[label={Aufgabe H\arabic*},start=40]
+    \item 
+        \begin{enumerate}
+            \item \blanko
+                \vspace{-\parskip}
+                \begin{figure}[h!]
+                    \centering
+                    \begin{tikzpicture}[node distance=0.9cm,>=stealth',bend angle=30,auto,scale=1.3,every node/.style={scale=1.3}]
+                        \tikzstyle{place}=[circle,thick,draw=blue!75,fill=blue!20,minimum size=6mm]
+                        \tikzstyle{transition}=[rectangle,thick,draw=black!75,
+                                  fill=black!20,minimum height=8mm,inner ysep=3pt]
+
+                        \tikzstyle{every label}=[black]
+
+                        \begin{scope}
+                        \node [place,label=left:{\small $\scriptstyle S_\text{Links}$},tokens=2]      (s1) {};
+                        \node [transition,label=above:{\small $\scriptstyle T_\text{L-überqueren}$}]  (t1) [above right=of s1] {};
+                        \node [transition,label=below:{\small $\scriptstyle T_\text{R-überquert}$}]   (t4) [below right=of s1] {};
+                        \node [place,label=below:{\small $\scriptstyle S_\text{Semaphore}$},tokens=1] (s5) [right =2of s1] {};
+                        \node [place,label=below:{\small $\scriptstyle S_\text{Links nach Rechts}$}]  (s2) at (t1 -| s5) {};
+                        \node [place,label=below:{\small $\scriptstyle S_\text{Rechts nach Links}$}]  (s4) at (t4 -| s5) {};
+                        \node [place,label=right:{\small $\scriptstyle S_\text{Rechts}$},tokens=2]    (s3) [right =2of s5] {};
+                        \node [transition,label=above:{\small $\scriptstyle T_\text{L-überquert}$~~}]   (t2) [above left=of s3] {};
+                        \node [transition,label=below:{\small ~~$\scriptstyle T_\text{R-überqueren}$}]  (t3) [below left=of s3] {};
+
+                        \draw (t1) edge [pre,out=180,in=90,looseness=1.1]  node[above]{\tiny 1}   (s1);
+                        \draw (t1) edge [post]  node{\tiny 1}                                     (s2);
+                        \draw (t2) edge [pre]  node[above]{\tiny 1}                               (s2);
+                        \draw (t2) edge [post,out=0,in=90]  node{\tiny 1}                         (s3);
+                        \draw (t3) edge [pre,out=0,in=270]  node[below=1mm]{\tiny 1}              (s3);
+                        \draw (t3) edge [post] node{\tiny 1}                                      (s4);
+                        \draw (t4) edge [pre]  node[below]{\tiny 1}                               (s4);
+                        \draw (t4) edge [post,out=180,in=270,looseness=1.1]  node{\tiny 1}        (s1);
+
+                        \draw (t1) edge [pre,out=225,in=170,looseness=1.3] node[above]{\tiny 1}   (s5);
+                        \draw (t4) edge [post,out=135,in=190,looseness=1.3] node[below]{\tiny 1}  (s5);
+                        \draw (t2) edge [post,out=315,in=10,looseness=1.3] node[above]{\tiny 1}   (s5);
+                        \draw (t3) edge [pre,out=45,in=350,looseness=1.3] node[below]{\tiny 1}    (s5);
+                        \end{scope}
+                    \end{tikzpicture}
+                \end{figure}
+            \item Kennzeichnung:
+
+                \begin{center}
+                    \begin{tikzpicture}[node distance=1.3cm,>=stealth',bend angle=30,auto,scale=0.8,every node/.style={scale=0.8}]
+                        \tikzstyle{state}=[rectangle,thick,draw=black!50,
+                                  fill=black!20,minimum width=8mm,inner ysep=3pt,rounded corners=5pt]
+
+                        \tikzstyle{every label}=[black]
+
+                        \begin{scope}
+                        \node [state] (mi) {\texttt{M\textsubscript{i}=(S1,S2,S5,S4,S3)}};
+                        \end{scope}
+                    \end{tikzpicture}
+                \end{center}
+
+                \begin{multicols}{2}
+                    \begin{center}
+                        \begin{tabular}[0.9\textwidth]{@{}ll@{}}
+                            \toprule
+                            Petri-Netz & Erreichbarkeitsgraph \\
+                            \midrule
+                            $S_\text{Links}$ & \texttt{S1} \\
+                            $S_\text{Links nach Rechts}$ & \texttt{S2} \\
+                            $S_\text{Semaphore}$ & \texttt{S5} \\
+                            $S_\text{Rechts}$ & \texttt{S3} \\
+                            $S_\text{Rechts nach Links}$ & \texttt{S4} \\
+                            \bottomrule
+                        \end{tabular}
+                    \end{center}
+                    \begin{center}
+                        \begin{tabular}[0.9\textwidth]{@{}ll@{}}
+                            \toprule
+                            Petri-Netz & Erreichbarkeitsgraph \\
+                            \midrule
+                            $T_\text{L-Überqueren}$ & \texttt{T1} \\
+                            $T_\text{L-Überquert}$ & \texttt{T2} \\
+                            $T_\text{R-Überqueren}$ & \texttt{T3} \\
+                            $T_\text{R-Überquert}$ & \texttt{T4} \\
+                            \bottomrule
+                        \end{tabular}
+                    \end{center}
+                \end{multicols}
+                \pagebreak
+                \begin{figure}[h!]
+                    \centering
+                    \begin{tikzpicture}[node distance=0.5cm,>=stealth',bend angle=30,auto,scale=0.8,every node/.style={scale=0.8}]
+                        \tikzstyle{state}=[rectangle,thick,draw=black!50,
+                                  fill=black!20,minimum width=8mm,inner ysep=3pt,rounded corners=5pt]
+
+                        \tikzstyle{every label}=[black]
+
+                        \begin{scope}
+                        % \node [state] (m0) {\texttt{M\textsubscript{0}=(S1,S2,S5,S4,S3)}};
+                        \node [state] (m0) {\texttt{M\textsubscript{0}=(2,0,1,0,2)}};
+
+                        % Spacing Markers
+                        \node (sprlefty) [below left=1 of m0] {};
+                        \node (sprleftx) [below left=4 of m0] {};
+                        \node (sprrghty) [below right=1 of m0] {};
+                        \node (sprrghtx) [below right=4 of m0] {};
+
+                        % Actual Reachability Graph
+                        % 2nd Level
+                        \node [state] (m1) at (sprleftx |- sprlefty)  {\texttt{M\textsubscript{1}=(1,1,0,0,2)}};
+                        \node [state] (m2) [below =of m1]             {\texttt{M\textsubscript{2}=(1,0,1,0,3)}};
+                        \draw (m0) edge [post] node{\texttt{T1}} (m1);
+                        \draw (m1) edge [post] node{\texttt{T2}} (m2);
+
+                        \node [state] (m3) at (sprrghtx |- sprrghty)  {\texttt{M\textsubscript{3}=(2,0,0,1,1)}};
+                        \node [state] (m4) [below =of m3]             {\texttt{M\textsubscript{4}=(3,0,1,0,1)}};
+                        \draw (m0) edge [post] node{\texttt{T3}} (m3);
+                        \draw (m3) edge [post] node{\texttt{T4}} (m4);
+
+                        % 3rd Level
+                        \node [state] (m5) [below left=of m2]         {\texttt{M\textsubscript{5}=(0,1,0,0,3)}};
+                        \node [state] (m6) [below =of m5]             {\texttt{M\textsubscript{6}=(0,0,1,0,4)}};
+                        \draw (m2) edge [post] node{\texttt{T1}} (m5);
+                        \draw (m5) edge [post] node{\texttt{T2}} (m6);
+
+                        \node [state] (m7) [below right=of m2]        {\texttt{M\textsubscript{7}=(1,0,0,1,2)}};
+                        \draw (m2) edge [post] node{\texttt{T3}} (m7);
+                        \draw (m7) edge [post] node{\texttt{T4}} (m0);
+
+                        \node [state] (m8) [below left=of m4]         {\texttt{M\textsubscript{8}=(2,1,0,0,1)}};
+                        \draw (m4) edge [post] node{\texttt{T1}} (m8);
+                        \draw (m8) edge [post] node{\texttt{T2}} (m0);
+
+                        \node [state] (m9) [below right=of m4]        {\texttt{M\textsubscript{9}=(3,0,0,1,0)}};
+                        \node [state] (m10) [below =of m9]            {\texttt{M\textsubscript{10}=(4,0,1,0,0)}};
+                        \draw (m4) edge [post] node{\texttt{T3}} (m9);
+                        \draw (m9) edge [post] node{\texttt{T4}} (m10);
+
+                        % 4th Level
+                        \node (m11spcr) [below right=of m6] {};
+                        \node [state] (m11) at (m2 |- m11spcr)        {\texttt{M\textsubscript{11}=(0,0,0,1,3)}};
+                        \draw (m6) edge [post] node{\texttt{T3}} (m11);
+                        \draw (m11) edge [post] node{\texttt{T4}} (m2);
+
+                        \node (m12spcr) [below left=of m10] {};
+                        \node [state] (m12) at (m4 |- m12spcr)        {\texttt{M\textsubscript{12}=(3,1,0,0,0)}};
+                        \draw (m10) edge [post] node{\texttt{T1}} (m12);
+                        \draw (m12) edge [post] node{\texttt{T2}} (m4);
+                        \end{scope}
+                    \end{tikzpicture}
+                \end{figure}
+            \item Es ist ein faires Petri-Netz. In jedem zyklischen Teilgraphen des Erreichbarkeitsgraphs wird alle Transitionen $T_1$ bis $T_4$ bei einem unendlichen Durchlauf unendlich oft geschaltet. Ein Beispiel dafür ist $M_0 \overset{T_1}{\longrightarrow} M_1\overset{T_2}{\longrightarrow}  M_2 \overset{T_3}{\longrightarrow}  M_7 \overset{T_4}{\longrightarrow} M_0$
+        \end{enumerate}
+    \item 
+        \begin{enumerate}
+            \makeatletter
+                \setlength{\leftmargins}{\@totalleftmargin}
+            \makeatother
+
+            \item Wenn es keinen wechselseitigen Ausschluss gibt, kann es zu Inkonsistenzen führen. Beispielsweise können Dateien von $P_1$ nicht gedruckt werden, wenn $P_2$ und $P_1$ das Dateipointer in die Warteschlange (fast) gleichzeitig ändern. 
+
+                Seien \texttt{next = 0} und die Warteschlange leer am Anfang.
+                \begin{center}
+                    \scriptsize
+                    \renewcommand{\arraystretch}{1.2}
+                    \begin{tabularx}{0.86\textwidth}{@{}XXXXX@{}}
+                        \toprule
+                        {\small aktiver Prozess} & {\small ausgeführte Codezeile} & {\small Inhalt von \texttt{w}} & {\small Wert von \texttt{next}} & {\small Kommentar} \\
+                        \midrule
+                        $P_1$ & \texttt{W[next] = pointer\textunderscore file1} & \texttt{[ptr\textunderscore1, ...]} & 0 & $P_1$ möchte die Datei \texttt{ptr\textunderscore1} drucken. \\
+                        $P_2$ & \texttt{W[next] = pointer\textunderscore file2} & \texttt{[ptr\textunderscore2, ...]} & 0 & $P_2$ möchte die Datei \texttt{ptr\textunderscore2} drucken. $w$ wird überschrieben. \\
+                        $P_2$ & \texttt{next = next + 1} & \texttt{[ptr\textunderscore2, ...]} & 1 & $P_2$ incrementiert \texttt{next}. \\
+                        $P_1$ & \texttt{next = next + 1} & \texttt{[ptr\textunderscore2, ...]} & 2 & $P_1$ incrementiert \texttt{next}. \\
+                        \bottomrule
+                    \end{tabularx}
+                \end{center}
+
+                In diesem Ablauf gibt es nur eine Datei in die Warteschlange \texttt{w}, obwohl die Variable \texttt{next} zeichnet, dass es 2 davon gibt. \texttt{w} war von $P_2$ überschrieben. Die Datei von $P_1$ wird dann nicht gedruckt.
+
+                \pagebreak
+            \item \blanko
+                Wir gehen davon aus, dass es sich nur um 2 Prozessen behandelt.
+                \begin{multicols}{2}
+                    Prozess $P_1$
+                    \begin{minted}[linenos,autogobble,xleftmargin=-\leftmargins,frame=leftline,framesep=10pt]{java}
+                        ...
+                        flags[1] = true;
+                        turn = 2;
+                        while (flags[2] && turn == 2) 
+                            { wait(); }
+                        w[next] = pointer_file1;
+                        next = next + 1
+                        flags[1] = false;
+                        ...
+                    \end{minted}
+                    Prozess $P_2$
+                    \begin{minted}[linenos,autogobble,xleftmargin=-0.5\leftmargins,frame=leftline,framesep=10pt]{java}
+                        ...
+                        flags[2] = true;
+                        turn = 1;
+                        while (flags[1] && turn == 1) 
+                            { wait(); }
+                        w[next] = pointer_file2;
+                        next = next + 1
+                        flags[2] = false;
+                        ...
+                    \end{minted}
+                \end{multicols}
+            \item Es funktioniert bei 2 Prozessen aber skaliert nicht gut bei mehreren Prozessen. Bei mehreren Prozessen ist "Bounded Waiting" nicht garantiert. 
+        \end{enumerate}
+    \item Sehen Sie bitte \texttt{u08-h42.txt}
+\end{enumerate}

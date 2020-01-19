@@ -1,0 +1,33 @@
+\begin{enumerate}[label={T\arabic*},start=6]
+	\item 
+		Anwender Ebene:			Benutzer
+		Anwendeungsprogramme: 	Web Browser, Office Programme, Shell, Unix Compiler
+		BS: 					Speicherverwaltung, E/Aroutinen, Windows Systemsteuerung, Dateisystem, Speicherverwalting
+		Hardware: 				Drucker, CPU, Festplatte, Hauptspeicher
+	\item 
+		a) mult(2,3) > mult(1,3) > mult(0,3)
+
+		b) Register, PC (Ruecksprungadress), Paramter (Erg.)
+
+		c) 	(i) Prolog des Callers (Prepare Caller to run) Register, Rueckspringadr, Parameter: auf dem Stack
+		   (ii) Prolog des Callees (Prepare Callee to run): Paramter runter
+		  (iii) Epilog des Callees: Ruecksprung addresse runter, Ergebnis auf dem Stack
+		   (iv) Epilog des Callers: Ergebis vom Stack, Register runter 
+	\item (a) "Hallo Welt\n Hallo Welt"
+	(Wie funktioniert Fork?)
+
+		   (b) Bis zum Ende des Terminals wird fuer jeden Nutzerbefehl eine Kopie des Prozesses erzeugt (fork) und in den Kindprocess dann das gewünschente Programm geladen (exec), der Terminalprozess bleibt wie er ist und dann den Vorgang wiedeerholen.
+
+		   to do differnet things -> if (pid == 0) etc.
+
+		   (c) Bei der Erstellung der Kpien wird also Parent -ID der Kindprocesse die Prozesses eingetragen. Man halt also die Datenstruktur eines Baumes. Auch der temrinalprocess ist Tiel eines Baumes, dessen Wurzel der Prozess init ist. 
+
+		   d) Falls Terminal Zwangsbeendet wird, dann sterben auch alle Kinder. Falls terminal mittels exit (erfolgreich) beendet wird, dann wird der Kindprozess zum Waisen und der INIT-Prozess übernimmt die Vaterrolle.
+	\item Round robin (6 then next, or wait for E/A-Op.)
+
+	
+
+\end{enumerate}
+
+Julian Hager
+Gruppe 08
