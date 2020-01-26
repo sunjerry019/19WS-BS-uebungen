@@ -1,4 +1,43 @@
+\newcommand{\SF}[1]{\textcolor{red}{#1}}
+
 \begin{enumerate}[label={Aufgabe H\arabic*},start=60]
+    \item \blanko
+        \begin{center}
+            \begin{tabular}{llllll}
+                \toprule
+                Zeit & Ref & $f_0, t$ & $f_1, t$ & $f_2, t$ & $\sum$ SF \\
+                \midrule
+                1  & 2 & \SF{2, 1}  & -          & -          & 1 \\
+                2  & 1 &     2, 1   & \SF{1, 2}  & -          & 2 \\
+                3  & 3 &     2, 1   &     1, 2   & \SF{3, 3}  & 3 \\
+                4  & 4 & \SF{4, 4}  &     1, 2   &     3, 3   & 4 \\
+                5  & 2 &     4, 4   & \SF{2, 5}  &     3, 3   & 5 \\
+                6  & 2 &     4, 4   &     2, 6   &     3, 3   & 5 \\
+                7  & 0 &     4, 4   &     2, 6   & \SF{0, 7}  & 6 \\
+                8  & 1 & \SF{1, 8}  &     2, 6   &     0, 7   & 7 \\
+                9  & 1 &     1, 9   &     2, 6   &     0, 7   & 7 \\
+                10 & 3 &     1, 9   & \SF{3, 10} &     0, 7   & 8 \\
+                11 & 1 &     1, 11  &     3, 10  &     0, 7   & 8 \\
+                12 & 2 &     1, 11  &     3, 10  & \SF{2, 12} & 9 \\
+                13 & 1 &     1, 13  &     3, 10  &     2, 12  & 9 \\
+                14 & 4 &     1, 13  & \SF{4, 14} &     2, 12  & 10 \\
+                15 & 4 &     1, 13  &     4, 15  &     2, 12  & 10 \\
+                16 & 1 &     1, 16  &     4, 15  &     2, 12  & 10 \\
+                \bottomrule
+            \end{tabular}
+        \end{center}
+        \vspace{\baselineskip}
+        
+        Es gibt insgesamt 10 Seitenfehler.
     \item 
+        \begin{enumerate}
+            \item 
+                \begin{enumerate}[label={(\roman*)}]
+                    \item $w(5,6) = 5$ \hspace{1cm} $W(5,6) = \makeset{1, 6, 3, 7, 8}$ 
+                    \item $w(7,4) = 3$ \hspace{1cm} $W(7,4) = \makeset{3, 7, 8}$
+                    \item $w(8,3) = 2$ \hspace{1cm} $W(8,3) = \makeset{3, 8}$
+                \end{enumerate}
+            \item 
+        \end{enumerate}
     \item Sehen Sie bitte \texttt{u12-h62.txt}
 \end{enumerate}
